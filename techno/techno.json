@@ -1,0 +1,116 @@
+{
+  "entries": [
+    {
+      "id": "chromerman",
+      "title": "Chromerman",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 36,
+        "height": 48,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "techno/chromerman.jpeg"
+    },
+    {
+      "id": "look-into-the-light",
+      "title": "Look Into The Light",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 32,
+        "height": 42,
+        "unit": "in"
+      },
+      "medium": "Charcoal on paper",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "techno/look-into-the-light.jpeg"
+    },
+    {
+      "id": "mesmerized",
+      "title": "Mesmerized",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 48,
+        "height": 24,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "techno/mesmerized.jpeg"
+    },
+    {
+      "id": "life-support",
+      "title": "Life Support",
+      "year": 2025,
+      "date": "",
+      "dimensions": {
+        "width": 17,
+        "height": 14,
+        "unit": "in"
+      },
+      "medium": "Oil on paper",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "techno/life-support.jpeg"
+    },
+    {
+      "id": "oil-change",
+      "title": "Oil Change",
+      "year": 2025,
+      "date": "",
+      "dimensions": {
+        "width": 14,
+        "height": 17,
+        "unit": "in"
+      },
+      "medium": "Oil and duct tape on paper",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "techno/oil-change.jpeg"
+    },
+    {
+      "id": "wisdom-of-the-crowds",
+      "title": "Wisdom of the Crowds",
+      "year": 2025,
+      "date": "",
+      "dimensions": {
+        "width": 17,
+        "height": 14,
+        "unit": "in"
+      },
+      "medium": "Oil on paper",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "techno/wisdom-of-the-crowds.jpeg"
+    },
+    {
+      "id": "electric-sheep",
+      "title": "Electric Sheep",
+      "year": 2022,
+      "date": "",
+      "dimensions": {
+        "width": 16,
+        "height": 22,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas board",
+      "sold": true,
+      "price": "",
+      "description": "",
+      "image": "techno/electric-sheep.jpeg"
+    }
+  ]
+}

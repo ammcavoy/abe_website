@@ -1,0 +1,84 @@
+{
+  "entries": [
+    {
+      "id": "ensign",
+      "title": "Ensign",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 60,
+        "height": 48,
+        "unit": "in"
+      },
+      "medium": "Oil on recycled sail",
+      "sold": true,
+      "price": "",
+      "description": "",
+      "image": "sailing/ensign.jpeg"
+    },
+    {
+      "id": "lightning-fast",
+      "title": "Lightning Fast",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 24,
+        "height": 18,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": true,
+      "price": "",
+      "description": "",
+      "image": "sailing/lightning-fast.jpeg"
+    },
+    {
+      "id": "mirage",
+      "title": "Mirage",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 30,
+        "height": 24,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": true,
+      "price": "",
+      "description": "",
+      "image": "sailing/mirage.jpeg"
+    },
+    {
+      "id": "scow-season",
+      "title": "Scow Season",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 22,
+        "height": 28,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": true,
+      "price": "",
+      "description": "",
+      "image": "sailing/scow-season.jpeg"
+    },
+    {
+      "id": "j88",
+      "title": "J88",
+      "year": 2025,
+      "date": "",
+      "dimensions": {
+        "width": 24,
+        "height": 24,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": true,
+      "price": "",
+      "description": "",
+      "image": "sailing/j88.jpeg"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "entries": [
+    {
+      "id": "flower-boy",
+      "title": "Flower Boy",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 36,
+        "height": 48,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "portraits/flower-boy.jpeg"
+    },
+    {
+      "id": "kauai-oo-bird-song",
+      "title": "Kaua'i 'ō'ō bird song",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 48,
+        "height": 36,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "portraits/kauai-oo-bird-song.jpeg"
+    },
+    {
+      "id": "wig",
+      "title": "Wig",
+      "year": 2026,
+      "date": "",
+      "dimensions": {
+        "width": 36,
+        "height": 48,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "portraits/wig.jpeg"
+    },
+    {
+      "id": "her",
+      "title": "HER",
+      "year": 2022,
+      "date": "",
+      "dimensions": {
+        "width": 24,
+        "height": 36,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "portraits/her.jpeg"
+    },
+    {
+      "id": "sunset",
+      "title": "Sunset",
+      "year": 2022,
+      "date": "",
+      "dimensions": {
+        "width": 36,
+        "height": 48,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "portraits/sunset.jpeg"
+    },
+    {
+      "id": "blond",
+      "title": "blond",
+      "year": 2021,
+      "date": "",
+      "dimensions": {
+        "width": 48,
+        "height": 60,
+        "unit": "in"
+      },
+      "medium": "Oil on canvas",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "portraits/blond.jpeg"
+    },
+    {
+      "id": "helmet",
+      "title": "Helmet",
+      "year": 2020,
+      "date": "",
+      "dimensions": {
+        "width": 24,
+        "height": 36,
+        "unit": "in"
+      },
+      "medium": "Oil on paper",
+      "sold": false,
+      "price": "",
+      "description": "",
+      "image": "portraits/helmet.jpeg"
+    }
+  ]
+}

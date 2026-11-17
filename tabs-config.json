@@ -1,0 +1,31 @@
+{
+  "tabs": [
+    {
+      "id": "techno",
+      "label": "Techno Series",
+      "dataFile": "techno/techno.json",
+      "enabled": true,
+      "itemType": "artwork",
+      "headerText": "Through cybernetic alterations, and dark club landscapes, my Techno series asks the question “what will party culture look like in a future dystopian society?” Science fiction has always been a strong interest of mine. With the exception of books and movies I have always felt closest to this genre in the bowls of a techno rave. Dark rooms, looming fog, electric lasers, and booming rhythm come together to create a community of freedom, escape, and acceptance. I draw inspiration from parties and raves attended in the past including clubs in Berlin, London, Chicago, Amsterdam and more. My work brings to life the visuals and rhythms of the future. Oil paintings depicting the deafening base to numb the pain, altered perceptions through substances, or parties full of cyborgs in a world post humanity.",
+      "coverPhoto": ""
+    },
+    {
+      "id": "sailing",
+      "label": "Sailing Series",
+      "dataFile": "sailing/sailing.json",
+      "enabled": true,
+      "itemType": "artwork",
+      "headerText": "Through raging waters or serene lake landscapes, I demonstrate the joy and competitiveness of modern sailboat racing and the connection between sailors and their boats. I have raced sail boats since I was eight years old, and shared my knowledge of sail boat racing through coaching since I was fifteen. I have always had a deep love for the sport and bringing that to my painting practice has been a tremendous pleasure. My oil landscapes embody the thrill of ripping down the lake with the spinnaker up, going around the top mark first in a fleet of fifty boats, or the serenity of taking a relaxing cruise. All sailors have a loving connection between themselves and their old sail boats, and being able to allow them to relive those memories through my paintings is a delight all on its own. Either on canvas or old recycled sail, my sail boat series illustrates the competitive thrill and beautiful community that sail boat racing is.",
+      "coverPhoto": ""
+    },
+    {
+      "id": "portraits",
+      "label": "Portrait Series",
+      "dataFile": "portraits/portraits.json",
+      "enabled": true,
+      "itemType": "artwork",
+      "headerText": "Through hyperrealistic portraiture, I explore human emotion, personality, and story telling in my oil paintings. The painting process begins with photography. Bringing a friend I know well, we traverse through whichever city we might be in and enjoy the time together taking photographs in a myriad of locations. The shoot is rough, raw, and dives into who the model is underneath the daily facade that covers their true essence. I choose the best photograph and the painting process begins. I capture the details within the image and layer them onto the canvas, manipulating and controlling aspects of the image I deem necessary to the portrait or which accentuates the emotion on the model. Whether It be the melancholy of modern life, the raw ecstasy of love, or the playful joy of a night gone on too long, I move to express these stories through my portraits.",
+      "coverPhoto": ""
+    }
+  ]
+}
