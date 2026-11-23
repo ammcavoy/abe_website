@@ -4,8 +4,27 @@ async function loadHomeContent() {
         const response = await fetch('home-config.json');
         const config = await response.json();
 
-        // Update profile photos (use selected photos)
+        // Featured artwork on the home page (optional)
+        const hero = document.getElementById('hero-artwork');
+        if (hero) {
+            if (config.heroImage) {
+                const img = hero.querySelector('img');
+                const caption = hero.querySelector('figcaption');
+                img.src = config.heroImage;
+                img.alt = config.heroCaption || 'Featured artwork';
+                if (caption) {
+                    caption.textContent = config.heroCaption || '';
+                    caption.style.display = config.heroCaption ? '' : 'none';
+                }
+                hero.style.display = '';
+            } else {
+                hero.style.display = 'none';
+            }
+        }
+
+        // Update profile photos (use selected photos); hide the row when there are none
         const photosToDisplay = config.selectedProfilePhotos || config.profilePhotos || [];
+        const profileRow = document.querySelector('.profile-images');
         if (photosToDisplay.length > 0) {
             const profileImageContainers = document.querySelectorAll('.profile-image');
             photosToDisplay.forEach((photoPath, index) => {
@@ -15,6 +34,12 @@ async function loadHomeContent() {
                     container.innerHTML = `<img src="${photoPath}" alt="Profile Photo">`;
                 }
             });
+            profileImageContainers.forEach((container, index) => {
+                container.style.display = index < photosToDisplay.length ? '' : 'none';
+            });
+            if (profileRow) profileRow.style.display = '';
+        } else if (profileRow) {
+            profileRow.style.display = 'none';
         }
 
         // Update tagline

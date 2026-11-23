@@ -342,7 +342,7 @@ function displayTabsList() {
                 <div>
                     <div class="tab-item-title">${tab.label} <small style="color: #999;">(${tab.id})</small></div>
                     <small style="color: ${tab.enabled ? 'green' : 'red'};">${tab.enabled ? 'Enabled' : 'Disabled'}</small>
-                    <small style="color: #999;"> · ${tab.itemType === 'artwork' ? 'Artwork' : 'Adventure'} items</small>
+                    <small style="color: #999;"> · ${tab.itemType === 'artwork' ? 'Artwork' : 'Adventure'} items${tab.group ? ` · in “${tab.group}” menu` : ''}</small>
                 </div>
                 <div class="tab-item-actions">
                     <button class="edit-tab-btn" onclick="editTab(${index})">Edit</button>
@@ -368,6 +368,7 @@ function editTab(index) {
     document.getElementById('tab-label').value = tab.label;
     document.getElementById('tab-header-text').value = tab.headerText || '';
     document.getElementById('tab-enabled').checked = tab.enabled;
+    document.getElementById('tab-group').value = tab.group || '';
     document.getElementById('tab-item-type').value = tab.itemType === 'artwork' ? 'artwork' : 'adventure';
     updateTabTypeFields();
 
@@ -499,6 +500,7 @@ function cancelTabEdit() {
     document.getElementById('editing-tab-id').value = '';
     document.getElementById('tab-header-text').value = '';
     document.getElementById('subtypes-container').innerHTML = '';
+    document.getElementById('tab-group').value = '';
     document.getElementById('tab-item-type').value = 'artwork';
     document.getElementById('tab-cover-photo').innerHTML = '<option value="">None</option>';
     updateTabTypeFields();
@@ -517,10 +519,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const tabLabel = document.getElementById('tab-label').value.trim();
             const tabHeaderText = document.getElementById('tab-header-text').value.trim();
             const tabEnabled = document.getElementById('tab-enabled').checked;
+            const tabGroup = document.getElementById('tab-group').value.trim();
             const tabItemType = document.getElementById('tab-item-type').value === 'artwork' ? 'artwork' : 'adventure';
             const tabCoverPhoto = document.getElementById('tab-cover-photo').value || '';
 
-            console.log('Tab data:', { tabId, tabLabel, tabHeaderText, tabEnabled, tabItemType, tabCoverPhoto });
+            console.log('Tab data:', { tabId, tabLabel, tabHeaderText, tabEnabled, tabGroup, tabItemType, tabCoverPhoto });
 
             // Validate tab ID format
             if (!/^[a-z0-9-]+$/.test(tabId)) {
@@ -554,6 +557,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 enabled: tabEnabled,
                 headerText: tabHeaderText
             };
+            if (tabGroup) tab.group = tabGroup;
             if (existing?.dataKey) tab.dataKey = existing.dataKey;
 
             if (tabItemType === 'artwork') {
@@ -684,6 +688,8 @@ function populateHomeForm() {
 
     document.getElementById('home-tagline').value = homeConfig.tagline || '';
     document.getElementById('home-about').value = homeConfig.about || homeConfig.aboutParagraph1 || '';
+    document.getElementById('home-hero-caption').value = homeConfig.heroCaption || '';
+    populateHeroImageSelect(homeConfig.heroImage || '');
 
     document.getElementById('home-current').value = homeConfig.professionalBackground?.current || '';
     document.getElementById('home-education').value = homeConfig.professionalBackground?.education || '';
@@ -699,6 +705,52 @@ function populateHomeForm() {
     homePhotosToDelete = [];
     newHomePhotos = [];
     displayHomePhotoGrid();
+}
+
+// Fill the featured-image select with every artwork from every artwork tab
+async function populateHeroImageSelect(current) {
+    const select = document.getElementById('home-hero-image');
+    if (!select) return;
+    select.innerHTML = '<option value="">None</option>';
+
+    try {
+        const response = await fetch('tabs-config.json', { cache: 'no-store' });
+        const config = await response.json();
+        const artworkTabs = (config.tabs || []).filter(t => t.enabled && t.itemType === 'artwork');
+
+        for (const tab of artworkTabs) {
+            try {
+                const dataResponse = await fetch(tab.dataFile, { cache: 'no-store' });
+                if (!dataResponse.ok) continue;
+                const data = await dataResponse.json();
+                const items = data.entries || data[tab.id] || [];
+                if (items.length === 0) continue;
+
+                const group = document.createElement('optgroup');
+                group.label = tab.label;
+                items.forEach(item => {
+                    if (!item.image) return;
+                    const option = document.createElement('option');
+                    option.value = item.image;
+                    option.textContent = item.title;
+                    group.appendChild(option);
+                });
+                select.appendChild(group);
+            } catch (error) {
+                console.warn(`Could not load ${tab.dataFile}:`, error.message);
+            }
+        }
+    } catch (error) {
+        console.warn('Could not load tabs for featured image select:', error.message);
+    }
+
+    if (current && !Array.from(select.options).some(o => o.value === current)) {
+        const option = document.createElement('option');
+        option.value = current;
+        option.textContent = `${current} (current)`;
+        select.appendChild(option);
+    }
+    select.value = current;
 }
 
 // Display home page photo grid
@@ -932,6 +984,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const updatedConfig = {
                 allProfilePhotos: homePhotos, // All photos in collection
                 selectedProfilePhotos: homeConfig?.selectedProfilePhotos || [],
+                heroImage: document.getElementById('home-hero-image').value || '',
+                heroCaption: document.getElementById('home-hero-caption').value.trim(),
                 tagline: document.getElementById('home-tagline').value.trim(),
                 about: document.getElementById('home-about').value.trim(),
                 professionalBackground: {

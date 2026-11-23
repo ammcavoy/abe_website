@@ -686,6 +686,12 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="tab-group">Navigation Group <small>(optional)</small></label>
+                            <input type="text" id="tab-group" placeholder="e.g., Portfolio">
+                            <small>Tabs with the same group name appear together under one dropdown in the navigation. Leave blank for a top-level link.</small>
+                        </div>
+
+                        <div class="form-group">
                             <label for="tab-item-type">Item Type *</label>
                             <select id="tab-item-type" onchange="updateTabTypeFields()">
                                 <option value="artwork">Artwork (one image, size, medium, year, sold)</option>
@@ -754,6 +760,19 @@
                         Click a photo to select it (max 2). Click the red X to delete.
                     </p>
                     <div id="home-photo-grid" class="photo-grid"></div>
+                </div>
+
+                <h3>Featured Artwork</h3>
+                <div class="form-group">
+                    <label for="home-hero-image">Featured Image <small>(optional)</small></label>
+                    <select id="home-hero-image">
+                        <option value="">None</option>
+                    </select>
+                    <small>Shown large at the top of the home page. Pick any piece from the portfolio tabs.</small>
+                </div>
+                <div class="form-group">
+                    <label for="home-hero-caption">Featured Image Caption <small>(optional)</small></label>
+                    <input type="text" id="home-hero-caption" placeholder='e.g., HER, 24" × 36", oil on canvas, 2022'>
                 </div>
 
                 <h3>Text Content</h3>

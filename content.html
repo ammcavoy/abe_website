@@ -4,33 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Loading...</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Leaflet CSS for maps -->
+    <!-- Leaflet CSS for maps (adventure tabs only) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-    <nav class="navbar">
+    <header class="navbar">
         <div class="container">
-            <div class="nav-brand">Abe Weston</div>
-            <ul class="nav-menu">
+            <a href="index.html" class="nav-brand">Abe Weston</a>
+            <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+            <ul class="nav-menu" id="nav-menu">
                 <!-- Navigation loaded dynamically -->
             </ul>
         </div>
-    </nav>
+    </header>
 
-    <section class="adventures">
-        <div class="container">
-            <div id="page-cover" class="page-cover" style="display: none;">
-                <!-- Tab cover artwork loaded from tabs-config.json -->
+    <main>
+        <section class="adventures content-page">
+            <div class="container">
+                <div id="page-cover" class="page-cover" style="display: none;">
+                    <!-- Tab cover artwork loaded from tabs-config.json -->
+                </div>
+                <h1 class="page-heading" id="page-heading"></h1>
+                <p class="section-intro" id="page-header-text">
+                    <!-- Header text loaded from tabs-config.json -->
+                </p>
+                <div id="content-grid" class="adventures-grid">
+                    <div class="loading-message">Loading...</div>
+                </div>
             </div>
-            <p class="section-intro" id="page-header-text">
-                <!-- Header text loaded from tabs-config.json -->
-            </p>
-            <div id="content-grid" class="adventures-grid">
-                <div class="loading-message">Loading...</div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="container">

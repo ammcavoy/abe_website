@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abe Weston - Portrait and Seascape Artist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar">
+    <header class="navbar">
         <div class="container">
-            <div class="nav-brand">Abe Weston</div>
-            <ul class="nav-menu">
+            <a href="index.html" class="nav-brand">Abe Weston</a>
+            <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="content.html?tab=techno">Techno Series</a></li>
                 <li><a href="content.html?tab=sailing">Sailing Series</a></li>
@@ -18,51 +22,57 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
-    </nav>
+    </header>
 
-    <section id="home" class="about">
-        <div class="container">
-            <h2>Abe Weston</h2>
-            <div class="profile-images">
-                <div class="profile-image placeholder">
-                    <span class="placeholder-text">Profile Photo 1</span>
+    <main>
+        <section id="home" class="home-hero">
+            <div class="container">
+                <figure class="hero-artwork" id="hero-artwork" style="display: none;">
+                    <img src="" alt="">
+                    <figcaption></figcaption>
+                </figure>
+                <p class="tagline">Portrait and Seascape Artist</p>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container narrow">
+                <h2>About</h2>
+                <div class="profile-images" style="display: none;">
+                    <div class="profile-image placeholder"></div>
+                    <div class="profile-image placeholder"></div>
                 </div>
-                <div class="profile-image placeholder">
-                    <span class="placeholder-text">Profile Photo 2</span>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>
+                            Born in Oshkosh, WI, Abe grew up drawing. Starting with chalk and charcoal, he later
+                            expanded towards oil painting, which continues to be his favorite medium.
+                        </p>
+                    </div>
+                    <div class="about-highlights">
+                        <ul>
+                            <li><strong>Education:</strong> B.S. in Art, UW Madison (2026)</li>
+                            <li><strong>Specialties:</strong> Oil painting, chalk and charcoal drawing</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <p class="tagline">Portrait and Seascape Artist</p>
-            <div class="about-content">
-                <div class="about-text">
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container narrow">
+                <h2>Contact</h2>
+                <div class="contact-info">
                     <p>
-                        Born in Oshkosh, WI, Abe grew up drawing. Starting with chalk and charcoal, he later
-                        expanded towards oil painting, which continues to be his favorite medium.
+                        <strong>Email:</strong> <a href="mailto:westoabe000@gmail.com">westoabe000@gmail.com</a>
+                    </p>
+                    <p>
+                        <strong>Location:</strong> Madison, WI
                     </p>
                 </div>
-                <div class="about-highlights">
-                    <h3>Background</h3>
-                    <ul>
-                        <li><strong>Education:</strong> B.S. in Art, UW Madison (2026)</li>
-                        <li><strong>Specialties:</strong> Oil painting, chalk and charcoal drawing</li>
-                    </ul>
-                </div>
             </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <div class="contact-info">
-                <p>
-                    <strong>Email:</strong> <a href="mailto:westoabe000@gmail.com">westoabe000@gmail.com</a>
-                </p>
-                <p>
-                    <strong>Location:</strong> Madison, WI
-                </p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="container">

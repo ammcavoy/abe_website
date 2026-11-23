@@ -67,6 +67,8 @@ async function loadTabConfig() {
         // Update page title and header
         const suffix = site.titleSuffix || site.siteName || '';
         document.getElementById('page-title').textContent = suffix ? `${tabConfig.label} - ${suffix}` : tabConfig.label;
+        const heading = document.getElementById('page-heading');
+        if (heading) heading.textContent = tabConfig.label;
         document.getElementById('page-header-text').textContent = tabConfig.headerText || '';
 
         // Tab cover: one of the tab's own artwork images, chosen in the admin

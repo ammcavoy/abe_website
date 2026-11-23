@@ -107,22 +107,40 @@ function renderNavigation(config, currentPage) {
     homeLi.appendChild(homeLink);
     navMenu.appendChild(homeLi);
 
-    // Add tab links
+    // Add tab links. Tabs that share a `group` are collected under one
+    // dropdown (e.g. "Portfolio" → Techno / Sailing / Portrait), in the
+    // position of the first tab in that group.
+    const folders = new Map();
     config.tabs.forEach(tab => {
         if (!tab.enabled) return;
 
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        // Route all tabs through content.html with tab parameter
-        a.href = `content.html?tab=${tab.id}`;
-        a.textContent = tab.label;
-
+        const link = document.createElement('a');
+        link.href = `content.html?tab=${tab.id}`;
+        link.textContent = tab.label;
         if (currentPage === tab.id) {
-            a.classList.add('active');
+            link.classList.add('active');
         }
 
-        li.appendChild(a);
-        navMenu.appendChild(li);
+        const group = (tab.group || '').trim();
+        if (!group) {
+            const li = document.createElement('li');
+            li.appendChild(link);
+            navMenu.appendChild(li);
+            return;
+        }
+
+        let folder = folders.get(group);
+        if (!folder) {
+            folder = createNavFolder(group);
+            folders.set(group, folder);
+            navMenu.appendChild(folder.li);
+        }
+        const itemLi = document.createElement('li');
+        itemLi.appendChild(link);
+        folder.list.appendChild(itemLi);
+        if (currentPage === tab.id) {
+            folder.title.classList.add('active');
+        }
     });
 
     // Add Contact link
@@ -132,6 +150,61 @@ function renderNavigation(config, currentPage) {
     contactLink.textContent = 'Contact';
     contactLi.appendChild(contactLink);
     navMenu.appendChild(contactLi);
+
+    setupNavToggle();
+}
+
+// Build a dropdown folder for a nav group. Opens on hover (desktop) and on
+// click/tap, and closes when focus or the pointer leaves it.
+function createNavFolder(label) {
+    const li = document.createElement('li');
+    li.className = 'nav-folder';
+
+    const title = document.createElement('button');
+    title.type = 'button';
+    title.className = 'nav-folder-title';
+    title.setAttribute('aria-haspopup', 'true');
+    title.setAttribute('aria-expanded', 'false');
+    title.innerHTML = `<span>${label}</span><span class="nav-folder-caret" aria-hidden="true"></span>`;
+
+    const list = document.createElement('ul');
+    list.className = 'nav-folder-content';
+
+    const setOpen = open => {
+        li.classList.toggle('open', open);
+        title.setAttribute('aria-expanded', String(open));
+    };
+
+    title.addEventListener('click', e => {
+        e.stopPropagation();
+        const open = !li.classList.contains('open');
+        document.querySelectorAll('.nav-folder.open').forEach(f => {
+            if (f !== li) f.classList.remove('open');
+        });
+        setOpen(open);
+    });
+    li.addEventListener('mouseenter', () => { if (window.matchMedia('(hover: hover)').matches) setOpen(true); });
+    li.addEventListener('mouseleave', () => { if (window.matchMedia('(hover: hover)').matches) setOpen(false); });
+    li.addEventListener('focusout', e => { if (!li.contains(e.relatedTarget)) setOpen(false); });
+    document.addEventListener('click', e => { if (!li.contains(e.target)) setOpen(false); });
+
+    li.appendChild(title);
+    li.appendChild(list);
+    return { li, title, list };
+}
+
+// Mobile menu button (present in the HTML as .nav-toggle)
+function setupNavToggle() {
+    const toggle = document.querySelector('.nav-toggle');
+    const navbar = document.querySelector('.navbar');
+    if (!toggle || !navbar || toggle.dataset.bound) return;
+    toggle.dataset.bound = 'true';
+
+    toggle.addEventListener('click', () => {
+        const open = navbar.classList.toggle('menu-open');
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.textContent = open ? 'Close Menu' : 'Menu';
+    });
 }
 
 // Render subtype navigation (appears below main nav)
