@@ -31,7 +31,20 @@ Under **Manage Tabs** each tab has an Item Type (Artwork or Adventure), a Descri
 
 ## Home page
 
-**Edit Home Page** sets the tagline, about text, background lines and contact details, plus up to two profile photos.
+**Edit Home Page** sets the featured artwork, tagline, about text, background lines and contact details, plus up to two profile photos. It also holds the contact page's image, caption and intro text.
+
+## Contact form (one-time setup)
+
+The site is static, so the contact form needs a small relay service to deliver mail. Until one is configured the form falls back to opening the visitor's own email app with the message pre-filled, which works but is less convenient.
+
+Recommended: [Formspree](https://formspree.io) (free tier is enough for a portfolio).
+
+1. Sign up with Abe's email (or your own, then set Abe's address as the form's recipient).
+2. Create a new form. Copy its endpoint, which looks like `https://formspree.io/f/abcdwxyz`.
+3. In the repo, set `contact.endpoint` in `site-config.json` to that URL and push. (This file is intentionally not editable from the admin page.)
+4. Submit a test message from `/contact.html`. The first submission may ask the recipient to confirm their email address.
+
+The form posts JSON with these fields: `name`, `email`, `subject`, `series`, `piece`, `pieceDetails`, `pieceUrl`, `message`, plus `_subject` (email subject line) and `_replyto` so replies go straight to the sender. A hidden `_gotcha` honeypot field filters bots. Any service that accepts a JSON POST and returns 2xx on success will work in place of Formspree.
 
 ## Troubleshooting
 

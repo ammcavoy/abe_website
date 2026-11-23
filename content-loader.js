@@ -149,6 +149,15 @@ function displayContent() {
         const card = createContentCard(item, index);
         grid.appendChild(card);
     });
+
+    // Deep link: content.html?tab=<id>&piece=<itemId> opens that piece
+    const requested = new URLSearchParams(window.location.search).get('piece');
+    if (requested) {
+        const item = filtered.find(i => i.id === requested);
+        if (item) {
+            if (isArtworkTab()) openArtworkModal(item); else openContentModal(item);
+        }
+    }
 }
 
 // Format artwork dimensions, e.g. 36" × 48" or 60 × 40 cm
@@ -211,6 +220,7 @@ function openArtworkModal(item) {
             <div class="artwork-details modal-date">${formatArtworkDetails(item)}${dateCreated ? ` · ${escapeHtml(dateCreated)}` : ''}</div>
             ${statusParts.length ? `<div class="artwork-status">${statusParts.join(' ')}</div>` : ''}
             ${item.description ? `<div class="modal-description">${escapeHtml(item.description).replace(/\n/g, '<br>')}</div>` : ''}
+            <p class="artwork-inquire"><a href="contact.html?piece=${encodeURIComponent(tabId)}/${encodeURIComponent(item.id)}">${item.sold ? 'Ask about this piece' : 'Inquire about purchasing'}</a></p>
         </div>
     `;
 

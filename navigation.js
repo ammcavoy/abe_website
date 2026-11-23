@@ -146,8 +146,11 @@ function renderNavigation(config, currentPage) {
     // Add Contact link
     const contactLi = document.createElement('li');
     const contactLink = document.createElement('a');
-    contactLink.href = 'index.html#contact';
+    contactLink.href = 'contact.html';
     contactLink.textContent = 'Contact';
+    if (currentPage === 'contact') {
+        contactLink.classList.add('active');
+    }
     contactLi.appendChild(contactLink);
     navMenu.appendChild(contactLi);
 

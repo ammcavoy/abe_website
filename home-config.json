@@ -11,9 +11,13 @@
     "specialties": "Oil painting, chalk and charcoal drawing",
     "technologies": ""
   },
+  "contactImage": "portraits/blond.jpeg",
+  "contactCaption": "blond, 48\" × 60\", oil on canvas, 2021",
+  "contactIntro": "Reach out for commissions, pricing on a piece, whether a piece is still available, or an image list. Delivery is included, and framing can be arranged before delivery.",
   "contact": {
     "email": "westoabe000@gmail.com",
     "phone": "",
-    "location": "Madison, WI"
+    "location": "Madison, WI",
+    "instagram": "westonportfolio"
   }
 }

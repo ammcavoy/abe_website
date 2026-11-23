@@ -689,7 +689,11 @@ function populateHomeForm() {
     document.getElementById('home-tagline').value = homeConfig.tagline || '';
     document.getElementById('home-about').value = homeConfig.about || homeConfig.aboutParagraph1 || '';
     document.getElementById('home-hero-caption').value = homeConfig.heroCaption || '';
-    populateHeroImageSelect(homeConfig.heroImage || '');
+    document.getElementById('home-instagram').value = homeConfig.contact?.instagram || '';
+    document.getElementById('home-contact-caption').value = homeConfig.contactCaption || '';
+    document.getElementById('home-contact-intro').value = homeConfig.contactIntro || '';
+    populateArtworkSelect('home-hero-image', homeConfig.heroImage || '');
+    populateArtworkSelect('home-contact-image', homeConfig.contactImage || '');
 
     document.getElementById('home-current').value = homeConfig.professionalBackground?.current || '';
     document.getElementById('home-education').value = homeConfig.professionalBackground?.education || '';
@@ -707,9 +711,9 @@ function populateHomeForm() {
     displayHomePhotoGrid();
 }
 
-// Fill the featured-image select with every artwork from every artwork tab
-async function populateHeroImageSelect(current) {
-    const select = document.getElementById('home-hero-image');
+// Fill a select with every artwork from every artwork tab (grouped by tab)
+async function populateArtworkSelect(selectId, current) {
+    const select = document.getElementById(selectId);
     if (!select) return;
     select.innerHTML = '<option value="">None</option>';
 
@@ -986,6 +990,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedProfilePhotos: homeConfig?.selectedProfilePhotos || [],
                 heroImage: document.getElementById('home-hero-image').value || '',
                 heroCaption: document.getElementById('home-hero-caption').value.trim(),
+                contactImage: document.getElementById('home-contact-image').value || '',
+                contactCaption: document.getElementById('home-contact-caption').value.trim(),
+                contactIntro: document.getElementById('home-contact-intro').value.trim(),
                 tagline: document.getElementById('home-tagline').value.trim(),
                 about: document.getElementById('home-about').value.trim(),
                 professionalBackground: {
@@ -997,7 +1004,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 contact: {
                     email: document.getElementById('home-email').value.trim(),
                     phone: document.getElementById('home-phone').value.trim(),
-                    location: document.getElementById('home-location').value.trim()
+                    location: document.getElementById('home-location').value.trim(),
+                    instagram: document.getElementById('home-instagram').value.trim().replace(/^@/, '')
                 }
             };
 
