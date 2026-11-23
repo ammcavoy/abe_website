@@ -44,7 +44,7 @@ Recommended: [Formspree](https://formspree.io) (free tier is enough for a portfo
 3. In the repo, set `contact.endpoint` in `site-config.json` to that URL and push. (This file is intentionally not editable from the admin page.)
 4. Submit a test message from `/contact.html`. The first submission may ask the recipient to confirm their email address.
 
-The form posts JSON with these fields: `name`, `email`, `subject`, `series`, `piece`, `pieceDetails`, `pieceUrl`, `message`, plus `_subject` (email subject line) and `_replyto` so replies go straight to the sender. A hidden `_gotcha` honeypot field filters bots. Any service that accepts a JSON POST and returns 2xx on success will work in place of Formspree.
+The form posts JSON with these fields: `firstName`, `lastName`, `name`, `email`, `phone` (optional), `subject`, `series`, `piece`, `pieceDetails`, `pieceUrl`, `message`, plus `_subject` (email subject line) and `_replyto` so replies go straight to the sender. A hidden `_gotcha` honeypot field filters bots. Any service that accepts a JSON POST and returns 2xx on success will work in place of Formspree.
 
 ## Troubleshooting
 

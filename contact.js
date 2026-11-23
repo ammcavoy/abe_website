@@ -199,9 +199,14 @@
 
     function collect() {
         const subjectSelect = el('contact-subject');
+        const firstName = el('contact-first-name').value.trim();
+        const lastName = el('contact-last-name').value.trim();
         const data = {
-            name: el('contact-name').value.trim(),
+            firstName: firstName,
+            lastName: lastName,
+            name: `${firstName} ${lastName}`.trim(),
             email: el('contact-email').value.trim(),
+            phone: el('contact-phone').value.trim(),
             subject: subjectSelect.options[subjectSelect.selectedIndex].text,
             subjectType: subjectSelect.value,
             message: el('contact-message').value.trim(),
@@ -221,15 +226,18 @@
         return data;
     }
 
+    // Returns the first problem found and the field to focus, or null when valid.
     function validate(data) {
-        if (!data.name) return 'Please enter your name.';
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return 'Please enter a valid email address.';
+        if (!data.firstName) return { message: 'Please enter your first name.', field: 'contact-first-name' };
+        if (!data.lastName) return { message: 'Please enter your last name.', field: 'contact-last-name' };
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return { message: 'Please enter a valid email address.', field: 'contact-email' };
+        if (data.phone && !/^[+\d][\d\s().-]{5,}$/.test(data.phone)) return { message: 'Please enter a valid phone number or leave it blank.', field: 'contact-phone' };
         if (isPurchase()) {
-            if (!el('contact-series').value) return 'Please choose a series.';
-            if (!el('contact-piece').value) return 'Please choose a piece.';
+            if (!el('contact-series').value) return { message: 'Please choose a series.', field: 'contact-series' };
+            if (!el('contact-piece').value) return { message: 'Please choose a piece.', field: 'contact-piece' };
         }
-        if (!data.message) return 'Please write a message.';
-        return '';
+        if (!data.message) return { message: 'Please write a message.', field: 'contact-message' };
+        return null;
     }
 
     function emailSubject(data) {
@@ -239,7 +247,9 @@
     }
 
     function emailBody(data) {
-        const lines = [`Name: ${data.name}`, `Email: ${data.email}`, `Subject: ${data.subject}`];
+        const lines = [`Name: ${data.name}`, `Email: ${data.email}`];
+        if (data.phone) lines.push(`Phone: ${data.phone}`);
+        lines.push(`Subject: ${data.subject}`);
         if (data.subjectType === 'purchase') {
             lines.push(`Series: ${data.series}`, `Piece: ${data.piece}${data.pieceSold ? ' (marked sold)' : ''}`);
             if (data.pieceDetails) lines.push(`Details: ${data.pieceDetails}`);
@@ -254,7 +264,9 @@
         const data = collect();
         const problem = validate(data);
         if (problem) {
-            setStatus(problem, 'error');
+            setStatus(problem.message, 'error');
+            const field = el(problem.field);
+            if (field) field.focus();
             return;
         }
         if (data._gotcha) {
@@ -283,6 +295,7 @@
                 summary: emailBody(data)
             };
             delete payload._gotcha;
+            if (!payload.phone) delete payload.phone;
 
             const response = await fetch(state.endpoint, {
                 method: 'POST',

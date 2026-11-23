@@ -948,6 +948,34 @@ h1, h2, h3 {
     margin-bottom: 1.25rem;
 }
 
+.contact-form .form-row-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.required-mark {
+    color: #b23a3a;
+    margin-left: 0.15rem;
+}
+
+.optional-mark {
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--accent);
+}
+
+.required-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: -0.25rem 0 1rem;
+}
+
+.contact-form input:user-invalid,
+.contact-form textarea:user-invalid {
+    border-color: #b23a3a;
+}
+
 .contact-form label {
     display: block;
     font-size: 0.8rem;
@@ -1201,6 +1229,11 @@ footer {
 
     .adventure-modal.active {
         padding: 3.5rem 0.75rem 2rem;
+    }
+
+    .contact-form .form-row-split {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
     }
 
     section {
