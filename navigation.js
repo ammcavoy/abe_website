@@ -54,9 +54,29 @@ async function applySiteName() {
     }
 }
 
+// Shared footer: Instagram icon links to the handle in home-config.json
+async function applyFooterSocial() {
+    const link = document.getElementById('footer-instagram');
+    if (!link) return;
+    try {
+        const response = await fetch('home-config.json');
+        if (!response.ok) return;
+        const home = await response.json();
+        const handle = String((home.contact && home.contact.instagram) || '').replace(/^@/, '').trim();
+        if (!handle) return;
+        link.href = `https://www.instagram.com/${encodeURIComponent(handle)}/`;
+        link.setAttribute('aria-label', `Instagram @${handle}`);
+        link.title = `@${handle} on Instagram`;
+        link.style.display = '';
+    } catch (error) {
+        console.warn('home-config.json not loaded for footer:', error);
+    }
+}
+
 // Initialize navigation
 async function initNavigation() {
     applySiteName();
+    applyFooterSocial();
     const config = await loadTabsConfig();
     if (!config) return;
 
@@ -143,7 +163,17 @@ function renderNavigation(config, currentPage) {
         }
     });
 
-    // Add Contact link
+    // Add About and Contact links
+    const aboutLi = document.createElement('li');
+    const aboutLink = document.createElement('a');
+    aboutLink.href = 'about.html';
+    aboutLink.textContent = 'About';
+    if (currentPage === 'about') {
+        aboutLink.classList.add('active');
+    }
+    aboutLi.appendChild(aboutLink);
+    navMenu.appendChild(aboutLi);
+
     const contactLi = document.createElement('li');
     const contactLink = document.createElement('a');
     contactLink.href = 'contact.html';

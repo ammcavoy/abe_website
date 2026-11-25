@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Abe Weston</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">Abe Weston</a>
+            <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+            <ul class="nav-menu" id="nav-menu">
+                <!-- Navigation loaded dynamically -->
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="about">
+            <div class="container narrow">
+                <h1 class="page-heading">About</h1>
+                <div class="profile-images" style="display: none;">
+                    <div class="profile-image placeholder"></div>
+                    <div class="profile-image placeholder"></div>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <!-- Loaded from home-config.json -->
+                    </div>
+                    <div class="about-highlights">
+                        <ul></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-spacer" aria-hidden="true"></div>
+            <a class="footer-instagram" id="footer-instagram" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: none;">
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                    <rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/>
+                </svg>
+            </a>
+            <p class="footer-copyright">&copy; 2026 <a href="admin.html" class="footer-name">Abe Weston</a>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="navigation.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>
