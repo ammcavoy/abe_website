@@ -1,6 +1,10 @@
 {
-  "allProfilePhotos": [],
-  "selectedProfilePhotos": [],
+  "allProfilePhotos": [
+    "photos/temp-about-photo.jpg"
+  ],
+  "selectedProfilePhotos": [
+    "photos/temp-about-photo.jpg"
+  ],
   "heroImage": "portraits/her.jpeg",
   "heroCaption": "HER, 24\" × 36\", oil on canvas, 2022",
   "tagline": "Portrait and Seascape Artist",
