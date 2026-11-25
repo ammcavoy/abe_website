@@ -9,13 +9,8 @@ async function loadHomeContent() {
         if (hero) {
             if (config.heroImage) {
                 const img = hero.querySelector('img');
-                const caption = hero.querySelector('figcaption');
                 img.src = config.heroImage;
-                img.alt = config.heroCaption || 'Featured artwork';
-                if (caption) {
-                    caption.textContent = config.heroCaption || '';
-                    caption.style.display = config.heroCaption ? '' : 'none';
-                }
+                img.alt = 'Featured artwork';
                 hero.style.display = '';
             } else {
                 hero.style.display = 'none';
@@ -23,7 +18,7 @@ async function loadHomeContent() {
         }
 
         // Update profile photos (use selected photos); hide the row when there are none
-        const photosToDisplay = config.selectedProfilePhotos || config.profilePhotos || [];
+        const photosToDisplay = config.selectedProfilePhotos || [];
         const profileRow = document.querySelector('.profile-images');
         if (photosToDisplay.length > 0) {
             const profileImageContainers = document.querySelectorAll('.profile-image');
@@ -65,8 +60,7 @@ async function loadHomeContent() {
                 const rows = [
                     ['Current', bg.current],
                     ['Education', bg.education],
-                    ['Specialties', bg.specialties],
-                    ['Technologies', bg.technologies]
+                    ['Specialties', bg.specialties]
                 ].filter(([, value]) => value && String(value).trim());
 
                 highlightsList.innerHTML = rows

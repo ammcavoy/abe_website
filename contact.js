@@ -48,10 +48,10 @@
 
         const figure = el('contact-artwork');
         if (figure && home.contactImage) {
-            // The piece is decorative here; the caption (if any) only serves as alt text.
+            // The piece is decorative here.
             const img = figure.querySelector('img');
             img.src = home.contactImage;
-            img.alt = home.contactCaption || 'Artwork';
+            img.alt = 'Artwork';
             figure.style.display = '';
         }
     }

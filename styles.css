@@ -280,13 +280,6 @@ h1, h2, h3 {
     margin: 0 auto;
 }
 
-.hero-artwork figcaption {
-    margin-top: 0.75rem;
-    font-size: 0.85rem;
-    color: var(--muted);
-    letter-spacing: 0.02em;
-}
-
 .tagline {
     font-size: 1.6rem;
     font-weight: 500;

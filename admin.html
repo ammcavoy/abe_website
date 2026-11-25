@@ -652,6 +652,8 @@
 
         <div class="admin-tabs" id="admin-tab-buttons">
             <button class="admin-tab-btn" onclick="switchAdminTab('home')">Edit Home Page</button>
+            <button class="admin-tab-btn" onclick="switchAdminTab('about')">Edit About Page</button>
+            <button class="admin-tab-btn" onclick="switchAdminTab('contact')">Edit Contact Page</button>
             <button class="admin-tab-btn" onclick="switchAdminTab('tabs')">Manage Tabs</button>
             <!-- Dynamic tab admin buttons will be inserted here by admin-dynamic.js -->
         </div>
@@ -741,27 +743,9 @@
         <!-- Home Page Editing Section -->
         <div id="admin-home-section" class="admin-section" style="display: none;">
             <h2>Edit Home Page</h2>
-            <p>Update the text content on your home page.</p>
+            <p>The featured artwork and tagline. The About and Contact pages have their own tabs.</p>
 
             <form id="home-form">
-                <h3>Profile Photos</h3>
-                <div class="form-group">
-                    <label for="home-photo-files">Upload New Profile Photos</label>
-                    <div id="home-photo-drop-zone" class="photo-drop-zone">
-                        <input type="file" id="home-photo-files" accept="image/*" multiple style="display: none;">
-                        <p>Drag photos here or <button type="button" class="browse-btn" onclick="document.getElementById('home-photo-files').click()">Browse Files</button></p>
-                    </div>
-                    <small>Upload additional photos to your collection</small>
-                </div>
-
-                <div id="home-photos-section" style="margin-top: 1rem; margin-bottom: 1.5rem;">
-                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Profile Photo Collection</label>
-                    <p style="margin-bottom: 1rem; color: #666; font-size: 0.95rem;">
-                        Click a photo to select it (max 2). Click the red X to delete.
-                    </p>
-                    <div id="home-photo-grid" class="photo-grid"></div>
-                </div>
-
                 <h3>Featured Artwork</h3>
                 <div class="form-group">
                     <label for="home-hero-image">Featured Image <small>(optional)</small></label>
@@ -770,22 +754,46 @@
                     </select>
                     <small>Shown large at the top of the home page. Pick any piece from the portfolio tabs.</small>
                 </div>
-                <div class="form-group">
-                    <label for="home-hero-caption">Featured Image Caption <small>(optional)</small></label>
-                    <input type="text" id="home-hero-caption" placeholder='e.g., HER, 24" × 36", oil on canvas, 2022'>
-                </div>
-
-                <h3>Text Content</h3>
+                <h3>Tagline</h3>
                 <div class="form-group">
                     <label for="home-tagline">Tagline *</label>
-                    <input type="text" id="home-tagline" placeholder="e.g., Software Engineer | Outdoor Adventurer | Explorer" required>
-                    <small>Appears below your name on the home page</small>
+                    <input type="text" id="home-tagline" placeholder="e.g., Portrait and Seascape Artist" required>
+                    <small>Appears under the featured artwork on the home page</small>
                 </div>
 
+                <button type="submit" class="submit-btn">Save Home Page Changes</button>
+            </form>
+        </div>
+
+        <!-- About Page Section (saved to home-config.json alongside the home page fields) -->
+        <div id="admin-about-section" class="admin-section" style="display: none;">
+            <h2>Edit About Page</h2>
+            <p>The photo and text shown on the About page.</p>
+
+            <form id="about-form">
+                <h3>About Photo</h3>
                 <div class="form-group">
-                    <label for="home-about">About Section *</label>
-                    <textarea id="home-about" rows="6" required></textarea>
-                    <small>Shown on the About page (blank lines become paragraph breaks)</small>
+                    <label for="home-photo-files">Upload New Photos</label>
+                    <div id="home-photo-drop-zone" class="photo-drop-zone">
+                        <input type="file" id="home-photo-files" accept="image/*" multiple style="display: none;">
+                        <p>Drag photos here or <button type="button" class="browse-btn" onclick="document.getElementById('home-photo-files').click()">Browse Files</button></p>
+                    </div>
+                    <small>Upload photos to your collection, then click one below to show it on the About page.</small>
+                </div>
+
+                <div id="home-photos-section" style="margin-top: 1rem; margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Photo Collection</label>
+                    <p style="margin-bottom: 1rem; color: #666; font-size: 0.95rem;">
+                        Click a photo to select it (max 2; they stack beside the text). Click the red X to delete.
+                    </p>
+                    <div id="home-photo-grid" class="photo-grid"></div>
+                </div>
+
+                <h3>About Text</h3>
+                <div class="form-group">
+                    <label for="home-about">About *</label>
+                    <textarea id="home-about" rows="8" required></textarea>
+                    <small>Blank lines become paragraph breaks</small>
                 </div>
 
                 <h3>Background</h3>
@@ -805,11 +813,16 @@
                     <input type="text" id="home-specialties" placeholder="e.g., Oil painting, chalk and charcoal drawing">
                 </div>
 
-                <div class="form-group">
-                    <label for="home-technologies">Technologies</label>
-                    <input type="text" id="home-technologies" placeholder="Optional">
-                </div>
+                <button type="submit" class="submit-btn">Save About Page Changes</button>
+            </form>
+        </div>
 
+        <!-- Contact Page Section (saved to home-config.json alongside the home page fields) -->
+        <div id="admin-contact-section" class="admin-section" style="display: none;">
+            <h2>Edit Contact Page</h2>
+            <p>Contact details, the artwork shown beside the form and the intro text.</p>
+
+            <form id="contact-admin-form">
                 <h3>Contact Information</h3>
 
                 <div class="form-group">
@@ -832,28 +845,23 @@
                     <input type="text" id="home-instagram" placeholder="e.g., westonportfolio">
                 </div>
 
-                <h3>Contact Page</h3>
+                <h3>Contact Page Content</h3>
 
                 <div class="form-group">
-                    <label for="home-contact-image">Contact Page Image <small>(optional)</small></label>
+                    <label for="home-contact-image">Artwork Beside the Form <small>(optional)</small></label>
                     <select id="home-contact-image">
                         <option value="">None</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="home-contact-caption">Contact Image Description <small>(optional, used as the image's alt text only)</small></label>
-                    <input type="text" id="home-contact-caption" placeholder='e.g., blond, 48" × 60", oil on canvas, 2021'>
-                </div>
-
-                <div class="form-group">
-                    <label for="home-contact-intro">Contact Page Intro <small>(optional)</small></label>
+                    <label for="home-contact-intro">Intro Text <small>(optional)</small></label>
                     <textarea id="home-contact-intro" rows="3" placeholder="Shown above the contact form"></textarea>
                 </div>
 
                 <p style="font-size: 0.9rem; color: #666;">The form sends through the relay endpoint in <code>site-config.json</code> (<code>contact.endpoint</code>). Until one is set, the form opens the visitor's email app instead. See ADMIN_GUIDE.md.</p>
 
-                <button type="submit" class="submit-btn">Save Home Page Changes</button>
+                <button type="submit" class="submit-btn">Save Contact Page Changes</button>
             </form>
         </div>
 

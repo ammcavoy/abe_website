@@ -289,8 +289,9 @@ function switchAdminTab(tab) {
         clickedBtn.classList.add('active');
     }
 
-    if (tab === 'home') {
-        document.getElementById('admin-home-section').style.display = 'block';
+    if (tab === 'home' || tab === 'about' || tab === 'contact') {
+        // All three forms edit home-config.json
+        document.getElementById(`admin-${tab}-section`).style.display = 'block';
         loadHomeConfig();
     } else if (tab === 'tabs') {
         document.getElementById('admin-tabs-section').style.display = 'block';
@@ -687,10 +688,8 @@ function populateHomeForm() {
     if (!homeConfig) return;
 
     document.getElementById('home-tagline').value = homeConfig.tagline || '';
-    document.getElementById('home-about').value = homeConfig.about || homeConfig.aboutParagraph1 || '';
-    document.getElementById('home-hero-caption').value = homeConfig.heroCaption || '';
+    document.getElementById('home-about').value = homeConfig.about || '';
     document.getElementById('home-instagram').value = homeConfig.contact?.instagram || '';
-    document.getElementById('home-contact-caption').value = homeConfig.contactCaption || '';
     document.getElementById('home-contact-intro').value = homeConfig.contactIntro || '';
     populateArtworkSelect('home-hero-image', homeConfig.heroImage || '');
     populateArtworkSelect('home-contact-image', homeConfig.contactImage || '');
@@ -698,14 +697,13 @@ function populateHomeForm() {
     document.getElementById('home-current').value = homeConfig.professionalBackground?.current || '';
     document.getElementById('home-education').value = homeConfig.professionalBackground?.education || '';
     document.getElementById('home-specialties').value = homeConfig.professionalBackground?.specialties || '';
-    document.getElementById('home-technologies').value = homeConfig.professionalBackground?.technologies || '';
 
     document.getElementById('home-email').value = homeConfig.contact?.email || '';
     document.getElementById('home-phone').value = homeConfig.contact?.phone || '';
     document.getElementById('home-location').value = homeConfig.contact?.location || '';
 
     // Initialize photo collection
-    homePhotos = [...(homeConfig.allProfilePhotos || homeConfig.profilePhotos || [])];
+    homePhotos = [...(homeConfig.allProfilePhotos || [])];
     homePhotosToDelete = [];
     newHomePhotos = [];
     displayHomePhotoGrid();
@@ -768,7 +766,7 @@ function displayHomePhotoGrid() {
     grid.innerHTML = '';
 
     const allPhotos = [...homePhotos, ...newHomePhotos];
-    const selectedPhotos = homeConfig?.selectedProfilePhotos || homeConfig?.profilePhotos || [];
+    const selectedPhotos = homeConfig?.selectedProfilePhotos || [];
 
     console.log('Displaying home photo grid:', {
         totalPhotos: allPhotos.length,
@@ -847,7 +845,7 @@ window.toggleHomePhotoSelection = function(index, isExisting) {
     console.log('Toggle photo selection:', { index, isExisting });
 
     const allPhotos = [...homePhotos, ...newHomePhotos];
-    let selectedPhotos = [...(homeConfig?.selectedProfilePhotos || homeConfig?.profilePhotos || [])];
+    let selectedPhotos = [...(homeConfig?.selectedProfilePhotos || [])];
 
     // Get the correct photo path - for new photos, use the tempPath stored on the object
     let photoPath;
@@ -976,49 +974,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Handle home form submission
+// Handle the home, about and contact forms. Each writes the whole of
+// home-config.json, reading every field from all three (always-present,
+// possibly hidden) forms.
+function collectHomeConfig() {
+    const value = id => document.getElementById(id).value.trim();
+    return {
+        allProfilePhotos: homePhotos, // All photos in collection
+        selectedProfilePhotos: homeConfig?.selectedProfilePhotos || [],
+        heroImage: document.getElementById('home-hero-image').value || '',
+        contactImage: document.getElementById('home-contact-image').value || '',
+        contactIntro: value('home-contact-intro'),
+        tagline: value('home-tagline'),
+        about: value('home-about'),
+        professionalBackground: {
+            current: value('home-current'),
+            education: value('home-education'),
+            specialties: value('home-specialties')
+        },
+        contact: {
+            email: value('home-email'),
+            phone: value('home-phone'),
+            location: value('home-location'),
+            instagram: value('home-instagram').replace(/^@/, '')
+        }
+    };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    const homeForm = document.getElementById('home-form');
-    if (homeForm) {
-        console.log('Home form found, attaching submit handler');
-        homeForm.addEventListener('submit', async function(e) {
+    [['home-form', 'Home page'], ['about-form', 'About page'], ['contact-admin-form', 'Contact page']].forEach(([formId, label]) => {
+        const form = document.getElementById(formId);
+        if (!form) return;
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            console.log('Home form submitted');
-
-            const updatedConfig = {
-                allProfilePhotos: homePhotos, // All photos in collection
-                selectedProfilePhotos: homeConfig?.selectedProfilePhotos || [],
-                heroImage: document.getElementById('home-hero-image').value || '',
-                heroCaption: document.getElementById('home-hero-caption').value.trim(),
-                contactImage: document.getElementById('home-contact-image').value || '',
-                contactCaption: document.getElementById('home-contact-caption').value.trim(),
-                contactIntro: document.getElementById('home-contact-intro').value.trim(),
-                tagline: document.getElementById('home-tagline').value.trim(),
-                about: document.getElementById('home-about').value.trim(),
-                professionalBackground: {
-                    current: document.getElementById('home-current').value.trim(),
-                    education: document.getElementById('home-education').value.trim(),
-                    specialties: document.getElementById('home-specialties').value.trim(),
-                    technologies: document.getElementById('home-technologies').value.trim()
-                },
-                contact: {
-                    email: document.getElementById('home-email').value.trim(),
-                    phone: document.getElementById('home-phone').value.trim(),
-                    location: document.getElementById('home-location').value.trim(),
-                    instagram: document.getElementById('home-instagram').value.trim().replace(/^@/, '')
-                }
-            };
-
             try {
-                await saveHomeConfig(updatedConfig, newHomePhotos, homePhotosToDelete);
-                alert('Home page updated successfully!');
+                await saveHomeConfig(collectHomeConfig(), newHomePhotos, homePhotosToDelete);
+                alert(`${label} updated successfully!`);
                 // Reload to show new photos
                 await loadHomeConfig();
             } catch (error) {
-                alert('Error saving home page: ' + error.message);
+                alert(`Error saving ${label.toLowerCase()}: ` + error.message);
             }
         });
-    }
+    });
 });
 
 // Save home config to GitHub

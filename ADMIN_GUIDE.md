@@ -29,9 +29,11 @@ Each series (Techno, Sailing, Portraits) is a tab. Under **Manage <Series>**:
 
 Under **Manage Tabs** each tab has an Item Type (Artwork or Adventure), a Description (the artist statement shown above the grid; blank lines become paragraph breaks) and, for artwork tabs, a **Cover Artwork** chosen from that tab's existing pieces. Saving writes `tabs-config.json`.
 
-## Home page
+## Home and About pages
 
-**Edit Home Page** sets the featured artwork, tagline, about text, background lines and contact details, plus up to two profile photos. It also holds the contact page's image (decorative, shown beside the form), its alt-text description and the intro text.
+**Edit Home Page** sets the featured artwork, tagline and contact details, plus the contact page's image (decorative, shown beside the form) and intro text.
+
+**Edit About Page** holds the About photo collection (click one to show it beside the text; up to two stack) and the about text and background lines. Both tabs save to the same `home-config.json`.
 
 ## Contact form (one-time setup)
 
