@@ -283,11 +283,11 @@ function switchAdminTab(tab) {
     document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.admin-section').forEach(section => section.style.display = 'none');
 
-    // Find and activate the button that was clicked
-    const clickedBtn = event?.target;
-    if (clickedBtn) {
-        clickedBtn.classList.add('active');
-    }
+    // Highlight the matching top-level button. Per-tab item editors live
+    // under Manage Portfolio, so they keep that button active.
+    const topLevel = ['home', 'about', 'contact', 'tabs'].includes(tab) ? tab : 'tabs';
+    const btn = document.getElementById(`admin-tab-btn-${topLevel}`);
+    if (btn) btn.classList.add('active');
 
     if (tab === 'home' || tab === 'about' || tab === 'contact') {
         // All three forms edit home-config.json
@@ -302,6 +302,7 @@ function switchAdminTab(tab) {
         const section = document.getElementById(sectionId);
         if (section) {
             section.style.display = 'block';
+            window.scrollTo({ top: 0 });
         }
     }
 }
@@ -346,7 +347,8 @@ function displayTabsList() {
                     <small style="color: #999;"> · ${tab.itemType === 'artwork' ? 'Artwork' : 'Adventure'} items${tab.group ? ` · in “${tab.group}” menu` : ''}</small>
                 </div>
                 <div class="tab-item-actions">
-                    <button class="edit-tab-btn" onclick="editTab(${index})">Edit</button>
+                    ${tab.enabled ? `<button class="manage-items-btn" onclick="switchAdminTab('${tab.id}')">Manage pieces</button>` : ''}
+                    <button class="edit-tab-btn" onclick="editTab(${index})">Edit settings</button>
                     <button class="delete-tab-btn" onclick="deleteTab(${index})">Delete</button>
                 </div>
             </div>

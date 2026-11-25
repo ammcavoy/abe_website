@@ -11,23 +11,16 @@ async function initializeDynamicAdmins() {
         const config = await response.json();
 
         const adminContainer = document.getElementById('admin-sections-container');
-        const tabButtonsContainer = document.getElementById('admin-tab-buttons');
 
-        if (!adminContainer || !tabButtonsContainer) {
+        if (!adminContainer) {
             console.error('Admin containers not found');
             return;
         }
 
+        // Per-tab item editors are reached from the Manage Portfolio tab
+        // (the "Manage pieces" button in the tab list), not from top-level buttons.
         config.tabs.forEach((tab, index) => {
             if (!tab.enabled) return;
-
-            // Create admin tab button
-            const tabBtn = document.createElement('button');
-            tabBtn.className = 'admin-tab-btn';
-            tabBtn.id = `admin-tab-btn-${tab.id}`;
-            tabBtn.textContent = `Manage ${tab.label}`;
-            tabBtn.onclick = () => switchAdminTab(tab.id);
-            tabButtonsContainer.appendChild(tabBtn);
 
             // Generate admin section
             const section = generateAdminSection(tab);
@@ -50,6 +43,7 @@ function generateAdminSection(tab) {
     section.style.display = 'none';
 
     section.innerHTML = `
+        <p><button type="button" class="back-link" onclick="switchAdminTab('tabs')">&larr; Back to Manage Portfolio</button></p>
         <h2>Manage ${tab.label}</h2>
         <p>Create, edit, and manage ${tab.label.toLowerCase()} entries.</p>
 

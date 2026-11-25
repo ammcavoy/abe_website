@@ -19,7 +19,7 @@ The token is stored in your browser's localStorage only. Revoke it at any time a
 
 ## Managing artworks
 
-Each series (Techno, Sailing, Portraits) is a tab. Under **Manage <Series>**:
+Each series (Techno, Sailing, Portraits) is a tab. Open **Manage Portfolio**, then click **Manage pieces** next to the series:
 
 - **Create New**: fill in Item ID (lowercase, hyphens; also used as the image file name), Title, Year, Width/Height/Unit, Medium, Sold, optional Price, optional Date created and Description, and choose one image. **Save to GitHub** uploads the image as `<tab>/<id>.<ext>` and updates `<tab>/<tab>.json` in one commit.
 - **Edit Existing**: pick a piece, change fields, optionally choose a replacement image, save.
@@ -27,7 +27,7 @@ Each series (Techno, Sailing, Portraits) is a tab. Under **Manage <Series>**:
 
 ## Managing tabs
 
-Under **Manage Tabs** each tab has an Item Type (Artwork or Adventure), a Description (the artist statement shown above the grid; blank lines become paragraph breaks) and, for artwork tabs, a **Cover Artwork** chosen from that tab's existing pieces. Saving writes `tabs-config.json`.
+Under **Manage Portfolio → Edit settings** each tab has an Item Type (Artwork or Adventure), a Description (the artist statement shown above the grid; blank lines become paragraph breaks) and, for artwork tabs, a **Cover Artwork** chosen from that tab's existing pieces. Saving writes `tabs-config.json`.
 
 ## Home and About pages
 
