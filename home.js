@@ -4,18 +4,20 @@ async function loadHomeContent() {
         const response = await fetch('home-config.json');
         const config = await response.json();
 
-        // Featured artwork on the home page (optional)
-        const hero = document.getElementById('hero-artwork');
-        if (hero) {
-            if (config.heroImage) {
-                const img = hero.querySelector('img');
-                img.src = config.heroImage;
+        // Featured artworks on the home page (both optional): the primary one
+        // sits beside the tagline, the secondary one below it.
+        [['hero-artwork', config.heroImage], ['hero-artwork-secondary', config.heroImageSecondary]].forEach(([id, src]) => {
+            const figure = document.getElementById(id);
+            if (!figure) return;
+            if (src) {
+                const img = figure.querySelector('img');
+                img.src = src;
                 img.alt = 'Featured artwork';
-                hero.style.display = '';
+                figure.style.display = '';
             } else {
-                hero.style.display = 'none';
+                figure.style.display = 'none';
             }
-        }
+        });
 
         // Update profile photos (use selected photos); hide the row when there are none
         const photosToDisplay = config.selectedProfilePhotos || [];

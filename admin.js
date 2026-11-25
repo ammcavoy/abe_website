@@ -694,6 +694,7 @@ function populateHomeForm() {
     document.getElementById('home-instagram').value = homeConfig.contact?.instagram || '';
     document.getElementById('home-contact-intro').value = homeConfig.contactIntro || '';
     populateArtworkSelect('home-hero-image', homeConfig.heroImage || '');
+    populateArtworkSelect('home-hero-image-secondary', homeConfig.heroImageSecondary || '');
     populateArtworkSelect('home-contact-image', homeConfig.contactImage || '');
 
     document.getElementById('home-current').value = homeConfig.professionalBackground?.current || '';
@@ -985,6 +986,7 @@ function collectHomeConfig() {
         allProfilePhotos: homePhotos, // All photos in collection
         selectedProfilePhotos: homeConfig?.selectedProfilePhotos || [],
         heroImage: document.getElementById('home-hero-image').value || '',
+        heroImageSecondary: document.getElementById('home-hero-image-secondary').value || '',
         contactImage: document.getElementById('home-contact-image').value || '',
         contactIntro: value('home-contact-intro'),
         tagline: value('home-tagline'),

@@ -31,7 +31,7 @@ Under **Manage Portfolio → Edit settings** each tab has an Item Type (Artwork 
 
 ## Home and About pages
 
-**Edit Home Page** sets the featured artwork, tagline and contact details, plus the contact page's image (decorative, shown beside the form) and intro text.
+**Edit Home Page** sets the two featured artworks (one beside the tagline, one below it), the tagline and contact details, plus the contact page's image (decorative, shown beside the form) and intro text.
 
 **Edit About Page** holds the About photo collection (click one to show it beside the text; up to two stack) and the about text and background lines. Both tabs save to the same `home-config.json`.
 
