@@ -72,19 +72,6 @@ async function loadHomeContent() {
             }
         }
 
-        // Update contact info (empty fields are left out)
-        if (config.contact) {
-            const contactInfo = document.querySelector('.contact-info');
-            if (contactInfo) {
-                const c = config.contact;
-                const rows = [];
-                if (c.email) rows.push(`<p><strong>Email:</strong> <a href="mailto:${c.email}">${c.email}</a></p>`);
-                if (c.phone) rows.push(`<p><strong>Phone:</strong> ${c.phone}</p>`);
-                if (c.location) rows.push(`<p><strong>Location:</strong> ${c.location}</p>`);
-                contactInfo.innerHTML = rows.join('');
-            }
-        }
-
     } catch (error) {
         console.error('Error loading home page content:', error);
     }
