@@ -37,7 +37,6 @@
         state.tabs = (tabsConfig.tabs || []).filter(t => t.enabled && t.itemType === 'artwork');
 
         renderIntro(home);
-        renderDirectContact(home);
         populateSeries();
         bindEvents();
         applyDeepLink();
@@ -49,29 +48,14 @@
 
         const figure = el('contact-artwork');
         if (figure && home.contactImage) {
+            // The piece is decorative here; the caption (if any) only serves as alt text.
             const img = figure.querySelector('img');
-            const caption = figure.querySelector('figcaption');
             img.src = home.contactImage;
             img.alt = home.contactCaption || 'Artwork';
-            caption.textContent = home.contactCaption || '';
-            caption.style.display = home.contactCaption ? '' : 'none';
             figure.style.display = '';
         }
     }
 
-    function renderDirectContact(home) {
-        const box = el('contact-direct');
-        if (!box) return;
-        const parts = [];
-        if (state.toEmail) {
-            parts.push(`<a href="mailto:${escapeHtml(state.toEmail)}">${escapeHtml(state.toEmail)}</a>`);
-        }
-        if (home.contact && home.contact.instagram) {
-            const handle = String(home.contact.instagram).replace(/^@/, '');
-            parts.push(`<a href="https://www.instagram.com/${encodeURIComponent(handle)}/" target="_blank" rel="noopener noreferrer">Instagram @${escapeHtml(handle)}</a>`);
-        }
-        box.innerHTML = parts.length ? `<p>Or reach me directly: ${parts.join(' · ')}</p>` : '';
-    }
 
     function populateSeries() {
         const select = el('contact-series');

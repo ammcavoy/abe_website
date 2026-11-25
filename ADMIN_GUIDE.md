@@ -31,7 +31,7 @@ Under **Manage Tabs** each tab has an Item Type (Artwork or Adventure), a Descri
 
 ## Home page
 
-**Edit Home Page** sets the featured artwork, tagline, about text, background lines and contact details, plus up to two profile photos. It also holds the contact page's image, caption and intro text.
+**Edit Home Page** sets the featured artwork, tagline, about text, background lines and contact details, plus up to two profile photos. It also holds the contact page's image (decorative, shown beside the form), its alt-text description and the intro text.
 
 ## Contact form (one-time setup)
 
